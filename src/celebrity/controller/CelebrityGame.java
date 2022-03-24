@@ -1,6 +1,9 @@
 package celebrity.controller;
 import java.util.ArrayList;
 
+import celebrity.model.Celebrity;
+import celebrity.view.CelebrityFrame;
+
 /**
  * The framework for the Celebrity Game project
  * 
@@ -12,20 +15,27 @@ public class CelebrityGame
 	/**
 	 * A reference to a Celebrity or subclass instance.
 	 */
+	private Celebrity currentCeleb;
 
 	/**
 	 * The GUI frame for the Celebrity game.
 	 */
+	private CelebrityFrame frame;
 
 	/**
 	 * The ArrayList of Celebrity values that make up the game
 	 */
+	private ArrayList<Celebrity> celebs;
 
 	/**
 	 * Builds the game and starts the GUI
 	 */
 	public CelebrityGame()
 	{
+		this.celebs = new ArrayList<Celebrity>();
+		this.currentCeleb = new Celebrity("Default", "");
+		this.frame = new CelebrityFrame(this);
+		prepareGame();
 	}
 
 	/**
@@ -33,6 +43,7 @@ public class CelebrityGame
 	 */
 	public void prepareGame()
 	{
+		
 	}
 
 	/**
@@ -102,7 +113,7 @@ public class CelebrityGame
 	 */
 	public int getCelebrityGameSize()
 	{
-		return 0;
+		return celebs.size();
 	}
 
 	/**
@@ -113,7 +124,7 @@ public class CelebrityGame
 	 */
 	public String sendClue()
 	{
-		return null;
+		return currentCeleb.getClue();
 	}
 
 	/**
@@ -124,6 +135,6 @@ public class CelebrityGame
 	 */
 	public String sendAnswer()
 	{
-		return null;
+		return currentCeleb.getAnswer();
 	}
 }
