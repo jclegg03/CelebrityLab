@@ -14,7 +14,8 @@ import celebrity.controller.CelebrityGame;
 public class CelebrityFrame extends JFrame
 {
 	//Data members for the JFrame subclass instance 
-	
+	public static final String START = "start";
+	public static final String GAME = "game";
 	/**
 	 * The instance of the panel used for playing the game.
 	 */
@@ -61,7 +62,14 @@ public class CelebrityFrame extends JFrame
 	 */
 	public void replaceScreen(String screen)
 	{
-		
+		if(screen.equals(GAME))
+		{
+			this.setContentPane(gamePanel);
+		}
+		else
+		{
+			this.setContentPane(startPanel);
+		}
 	}
 	
 }
