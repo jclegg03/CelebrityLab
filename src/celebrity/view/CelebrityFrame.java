@@ -16,6 +16,7 @@ public class CelebrityFrame extends JFrame
 	//Data members for the JFrame subclass instance 
 	public static final String START = "start";
 	public static final String GAME = "game";
+	
 	/**
 	 * The instance of the panel used for playing the game.
 	 */
@@ -34,7 +35,7 @@ public class CelebrityFrame extends JFrame
 	/**
 	 * A reference to the CelebrityGame instance to allow for minimized coupling in the object structure.
 	 */
-	private CelebrityGame controller;
+	private CelebrityGame app;
 	
 	
 	/**
@@ -44,8 +45,11 @@ public class CelebrityFrame extends JFrame
 	public CelebrityFrame(CelebrityGame controllerRef)
 	{
 		//The first line of any subclass should ALWAYS be a correct call to the super constructor.
-		super();
-	
+		super("Name that Celebrity!!!");
+		this.app = controllerRef;
+		this.startPanel = new StartPanel(app);
+		this.gamePanel = new CelebrityPanel(app);
+		setupFrame();
 	}
 	
 	/**
@@ -53,7 +57,8 @@ public class CelebrityFrame extends JFrame
 	 */
 	private void setupFrame()
 	{
-		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setVisible(true);
 	}
 	
 	/**
