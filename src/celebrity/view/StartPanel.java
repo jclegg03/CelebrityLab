@@ -190,6 +190,9 @@ public class StartPanel extends JPanel
 	  this.add(startButton);
 	  this.add(celebrityCountLabel);
     // Adds the RadioButtons to the group so only one can be selected.
+	  
+	  typeGroup.add(celebrityRadio);
+	  typeGroup.add(literatureRadio);
   }
   
   /**
