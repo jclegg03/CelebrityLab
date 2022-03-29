@@ -2,6 +2,7 @@ package celebrity.controller;
 import java.util.ArrayList;
 
 import celebrity.model.Celebrity;
+import celebrity.model.LiteratureCelebrity;
 import celebrity.view.CelebrityFrame;
 
 /**
@@ -102,7 +103,14 @@ public class CelebrityGame
 	{
 		if(validateCelebrity(name) && validateClue(guess, type))
 		{
-			celebs.add(new Celebrity(name, guess));
+			if(type.equals("Celebrity"))
+			{
+				celebs.add(new Celebrity(name, guess));
+			}
+			else if(type.equals("Literature"))
+			{
+				celebs.add(new LiteratureCelebrity(name, guess));
+			}
 		}
 	}
 
