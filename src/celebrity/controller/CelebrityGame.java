@@ -55,7 +55,7 @@ public class CelebrityGame
 	 */
 	public boolean processGuess(String guess)
 	{
-		return false;
+		return guess.trim().equalsIgnoreCase(currentCeleb.getAnswer());
 	}
 
 	/**
@@ -65,7 +65,11 @@ public class CelebrityGame
 	 */
 	public void play()
 	{
-		
+		if(celebs != null && getCelebrityGameSize() > 0)
+		{
+			currentCeleb = celebs.get((int) (Math.random() * celebs.size()));
+			frame.replaceScreen(CelebrityFrame.GAME);
+		}
 	}
 
 	/**
