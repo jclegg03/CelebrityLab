@@ -24,7 +24,7 @@ public class StartPanel extends JPanel
   /**
    * Reference to the Game to call methods.
    */
-  private CelebrityGame controller;
+  private CelebrityGame app;
   
   /**
    * The layout manager for the screen.
@@ -117,7 +117,7 @@ public class StartPanel extends JPanel
   public StartPanel(CelebrityGame controller)
   {
     super();
-    this.controller = controller;
+    this.app = controller;
     this.panelLayout = new SpringLayout();
     this.typeGroup = new ButtonGroup();
     this.celebrityRadio = new JRadioButton("Celebrity");
@@ -158,16 +158,16 @@ public class StartPanel extends JPanel
     
     if (literatureRadio.isSelected())
     {
-      validClue = controller.validateClue(clueText, "Literature");
+      validClue = app.validateClue(clueText, "Literature");
     }
     else
     {
-      validClue = controller.validateClue(clueText, "");
+      validClue = app.validateClue(clueText, "");
     }
     
     if (answerText.length() > 4)
     {
-      validAnswer = controller.validateCelebrity(answerText);
+      validAnswer = app.validateCelebrity(answerText);
     }
     
     return (validClue && validAnswer);
@@ -179,6 +179,16 @@ public class StartPanel extends JPanel
    */
   private void setupPanel()
   {
+	  this.setLayout(panelLayout);
+	  
+	  this.add(literatureRadio);
+	  this.add(celebrityRadio);
+	  this.add(clueLabel);
+	  this.add(answerField);
+	  this.add(clueField);
+	  this.add(addCelebrityButton);
+	  this.add(startButton);
+	  this.add(celebrityCountLabel);
     // Adds the RadioButtons to the group so only one can be selected.
   }
   
@@ -231,7 +241,7 @@ public class StartPanel extends JPanel
                                     {
       public void actionPerformed(ActionEvent mouseClick)
       {
-        controller.play();
+        app.play();
       }
     });
     
@@ -249,7 +259,7 @@ public class StartPanel extends JPanel
         {
           invalidInput();
         }
-        celebrityCount = controller.getCelebrityGameSize();
+        celebrityCount = app.getCelebrityGameSize();
         celebrityCountLabel.setText(countLabelText + celebrityCount);
       }
     });
@@ -283,7 +293,7 @@ public class StartPanel extends JPanel
     String clue = clueField.getText().trim();
     answerField.setText("");
     clueField.setText("");
-    controller.addCelebrity(answer, clue, type);
+    app.addCelebrity(answer, clue, type);
     startButton.setEnabled(true);
   }
   

@@ -14,8 +14,8 @@ import celebrity.controller.CelebrityGame;
 public class CelebrityFrame extends JFrame
 {
 	//Data members for the JFrame subclass instance 
-	public static final String START = "start";
-	public static final String GAME = "game";
+	public static final String START = "START";
+	public static final String GAME = "GAME";
 	
 	/**
 	 * The instance of the panel used for playing the game.
@@ -61,7 +61,7 @@ public class CelebrityFrame extends JFrame
 		this.panelCards.add(startPanel);
 		this.panelCards.add(gamePanel);
 		this.setSize(800, 800);
-		this.setContentPane(panelCards);
+		this.add(panelCards);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.replaceScreen(START);
@@ -77,11 +77,11 @@ public class CelebrityFrame extends JFrame
 		if(screen.equals(GAME))
 		{
 			gamePanel.addClue(app.sendClue());
-			this.setContentPane(gamePanel);
+			((CardLayout) panelCards.getLayout()).show(panelCards, screen);
 		}
 		else
 		{
-			this.setContentPane(startPanel);
+			((CardLayout) panelCards.getLayout()).show(panelCards, screen);
 		}
 	}
 	

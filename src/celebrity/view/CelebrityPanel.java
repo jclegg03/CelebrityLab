@@ -139,8 +139,8 @@ public class CelebrityPanel extends JPanel
     this.add(staticTimerLabel);
     
     //Changes the font to be larger than default
-    staticTimerLabel.setFont(new Font("Helvetica", Font.BOLD,20));
-    dynamicTimerLabel.setFont(new Font("Helvetica", Font.BOLD,20));
+    staticTimerLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
+    dynamicTimerLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
     
     // These lines allow vertical scrolling but not horizontal.
     cluePane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

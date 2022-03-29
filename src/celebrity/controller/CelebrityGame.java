@@ -42,7 +42,7 @@ public class CelebrityGame
 	public void prepareGame()
 	{
 		celebs = new ArrayList<Celebrity>();
-		frame.replaceScreen(CelebrityFrame.GAME);
+		frame.replaceScreen(CelebrityFrame.START);
 	}
 
 	/**
