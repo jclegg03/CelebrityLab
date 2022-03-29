@@ -55,7 +55,19 @@ public class CelebrityGame
 	 */
 	public boolean processGuess(String guess)
 	{
-		return guess.trim().equalsIgnoreCase(currentCeleb.getAnswer());
+		boolean correct = false;
+		
+		if(guess.trim().equalsIgnoreCase(currentCeleb.getAnswer()))
+		{
+			correct = true;
+			celebs.remove(currentCeleb);
+			if(celebs.size() > 0)
+			{
+				currentCeleb = celebs.get(0);
+			}
+		}
+		
+		return correct;
 	}
 
 	/**
@@ -65,10 +77,14 @@ public class CelebrityGame
 	 */
 	public void play()
 	{
-		if(celebs != null && getCelebrityGameSize() > 0)
+		if(celebs != null && celebs.size() > 0)
 		{
-			currentCeleb = celebs.get((int) (Math.random() * celebs.size()));
+			currentCeleb = celebs.get(0);
 			frame.replaceScreen(CelebrityFrame.GAME);
+		}
+		else
+		{
+			prepareGame();
 		}
 	}
 
@@ -109,7 +125,24 @@ public class CelebrityGame
 	 */
 	public boolean validateClue(String clue, String type)
 	{
-		return clue.trim().length() >= 10;
+		boolean valid = false;
+		
+		if(type.equals("Celebrity") && clue.trim().length() >= 10)
+		{
+			valid = true;
+		}
+		else if(type.equals("Literature") && clue.contains(","))
+		{
+			String first = clue.substring(0, clue.indexOf(","));
+			String second = clue.substring(clue.indexOf(",") + 2);
+			
+			if(first.length() >= 4 && second.length() >= 4)
+			{
+				valid = true;
+			}
+		}
+		
+		return valid;
 	}
 
 	/**
