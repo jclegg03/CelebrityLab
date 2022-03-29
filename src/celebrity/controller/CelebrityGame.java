@@ -32,8 +32,6 @@ public class CelebrityGame
 	 */
 	public CelebrityGame()
 	{
-		this.celebs = new ArrayList<Celebrity>();
-		this.currentCeleb = new Celebrity("Default", "");
 		this.frame = new CelebrityFrame(this);
 		prepareGame();
 	}
@@ -43,7 +41,8 @@ public class CelebrityGame
 	 */
 	public void prepareGame()
 	{
-		
+		celebs = new ArrayList<Celebrity>();
+		frame.replaceScreen(CelebrityFrame.GAME);
 	}
 
 	/**
@@ -81,7 +80,10 @@ public class CelebrityGame
 	 */
 	public void addCelebrity(String name, String guess, String type)
 	{
-		
+		if(validateCelebrity(name))
+		{
+			
+		}
 	}
 
 	/**
@@ -91,7 +93,7 @@ public class CelebrityGame
 	 */
 	public boolean validateCelebrity(String name)
 	{
-		return false;
+		return name.trim().length() >= 4;
 	}
 
 	/**
@@ -103,7 +105,7 @@ public class CelebrityGame
 	 */
 	public boolean validateClue(String clue, String type)
 	{
-		return false;
+		return clue.trim().length() >= 10;
 	}
 
 	/**
