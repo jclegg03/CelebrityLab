@@ -80,9 +80,9 @@ public class CelebrityGame
 	 */
 	public void addCelebrity(String name, String guess, String type)
 	{
-		if(validateCelebrity(name))
+		if(validateCelebrity(name) && validateClue(guess, type))
 		{
-			
+			celebs.add(new Celebrity(name, guess));
 		}
 	}
 
