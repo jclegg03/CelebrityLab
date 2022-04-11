@@ -21,7 +21,7 @@ public class CinemaCelebrity extends Celebrity
 		for(String clue : clueList)
 		{
 			clues.add(clue);
-			movies.add(clue.split(":")[1]);
+			movies.add(clue.split(":")[1].substring(2));
 		}
 	}
 	

@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import celebrity.model.Celebrity;
 import celebrity.model.LiteratureCelebrity;
+import celebrity.model.CinemaCelebrity;
+import celebrity.model.HistoricalCelebrity;
 import celebrity.view.CelebrityFrame;
 
 /**
@@ -111,6 +113,14 @@ public class CelebrityGame
 			{
 				celebs.add(new LiteratureCelebrity(name, guess));
 			}
+			else if(type.equals("Cinema"))
+			{
+				celebs.add(new CinemaCelebrity(name, guess));
+			}
+			else if(type.contentEquals("History"));
+			{
+				celebs.add(new HistoricalCelebrity(name, guess));
+			}
 		}
 	}
 
@@ -147,6 +157,25 @@ public class CelebrityGame
 			if(first.length() >= 4 && second.length() >= 4)
 			{
 				valid = true;
+			}
+		}
+		else if(type.contentEquals("Cinema") && clue.contains(":"))
+		{
+			String character = clue.substring(0, clue.indexOf(":"));
+			String movie = clue.substring(clue.indexOf(":") + 2);
+			
+			valid = movie.length() >= 4 && character.length() >= 4;
+		}
+		else if(type.equals("History"))
+		{
+			try
+			{
+				Integer.parseInt(clue);
+				valid = true;
+			}
+			catch(NumberFormatException notANumber)
+			{
+				valid = false;
 			}
 		}
 		

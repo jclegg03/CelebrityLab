@@ -50,6 +50,12 @@ public class StartPanel extends JPanel
   /**
    * Customize the JRadioButton for the class created sub class
    */
+  private JRadioButton cinemaRadio;
+  
+  /**
+   * Peer subclass
+   */
+  private JRadioButton historyRadio;
   
   /**
    * Label to guide the user to what should be inputted.
@@ -94,7 +100,12 @@ public class StartPanel extends JPanel
   /**
    * String to populate the clueLabel if Class Generated Celebrity is picked.
    */
+  private String cinemaClue;
   
+  /**
+   * String to populate the clueLabel if peer Celebrity is picked.
+   */
+  private String historyClue;
   
   /**
    * String used for static text in label.
@@ -122,8 +133,12 @@ public class StartPanel extends JPanel
     this.typeGroup = new ButtonGroup();
     this.celebrityRadio = new JRadioButton("Celebrity");
     this.literatureRadio = new JRadioButton("Literature Celebrity");
+    this.cinemaRadio = new JRadioButton("Cinema Celebrity");
+    this.historyRadio = new JRadioButton("Historical Celebrity");
     this.celebrityClue = "Enter the clue for the celebrity";
     this.literatureClue = "Enter the clues for the literature celeb separated by commas";
+    this.cinemaClue = "Enter the characters they play then a : then the movie its from. Seperate values with commas.";
+    this.historyClue = "Enter the birth year (number) of the celebrity";
     this.clueLabel = new JLabel(celebrityClue);
     
     this.answerField = new JTextField("Type celebrity here (4 letters minimum thx Cher)");
@@ -160,6 +175,14 @@ public class StartPanel extends JPanel
     {
       validClue = app.validateClue(clueText, "Literature");
     }
+    else if(cinemaRadio.isSelected())
+    {
+    	validClue = app.validateClue(clueText, "Cinema");
+    }
+    else if(historyRadio.isSelected())
+    {
+    	validClue = app.validateClue(clueText, "History");
+    }
     else
     {
       validClue = app.validateClue(clueText, "");
@@ -183,6 +206,8 @@ public class StartPanel extends JPanel
 	  
 	  this.add(literatureRadio);
 	  this.add(celebrityRadio);
+	  this.add(cinemaRadio);
+	  this.add(historyRadio);
 	  this.add(clueLabel);
 	  this.add(answerField);
 	  this.add(clueField);
@@ -193,6 +218,8 @@ public class StartPanel extends JPanel
 	  
 	  typeGroup.add(celebrityRadio);
 	  typeGroup.add(literatureRadio);
+	  typeGroup.add(cinemaRadio);
+	  typeGroup.add(historyRadio);
   }
   
   /**
@@ -202,31 +229,37 @@ public class StartPanel extends JPanel
    */
   private void setupLayout()
   {
-    panelLayout.putConstraint(SpringLayout.WEST, clueLabel, 0, SpringLayout.WEST, celebrityRadio);
+    panelLayout.putConstraint(SpringLayout.WEST, clueLabel, 0, SpringLayout.WEST, historyRadio);
     panelLayout.putConstraint(SpringLayout.NORTH, celebrityRadio, 15, SpringLayout.NORTH, this);
     panelLayout.putConstraint(SpringLayout.WEST, celebrityRadio, 15, SpringLayout.WEST, this);
     panelLayout.putConstraint(SpringLayout.EAST, addCelebrityButton, 0, SpringLayout.EAST, startButton);
     panelLayout.putConstraint(SpringLayout.NORTH, addCelebrityButton, 20, SpringLayout.SOUTH, clueField);
-    panelLayout.putConstraint(SpringLayout.WEST, addCelebrityButton, 0, SpringLayout.WEST, celebrityRadio);
+    panelLayout.putConstraint(SpringLayout.WEST, addCelebrityButton, 0, SpringLayout.WEST, historyRadio);
     
     panelLayout.putConstraint(SpringLayout.NORTH, startButton, 20, SpringLayout.SOUTH, addCelebrityButton);
-    panelLayout.putConstraint(SpringLayout.NORTH, celebrityCountLabel, 0, SpringLayout.NORTH, celebrityRadio);
+    panelLayout.putConstraint(SpringLayout.NORTH, celebrityCountLabel, 0, SpringLayout.NORTH, historyRadio);
     panelLayout.putConstraint(SpringLayout.EAST, celebrityCountLabel, -45, SpringLayout.EAST, this);
     
+    //peer button
+    panelLayout.putConstraint(SpringLayout.NORTH, historyRadio, 10, SpringLayout.SOUTH, cinemaRadio);
+    panelLayout.putConstraint(SpringLayout.WEST, historyRadio, 0, SpringLayout.WEST, cinemaRadio);
+    
     //Put your custom radio button info here
+    panelLayout.putConstraint(SpringLayout.NORTH, cinemaRadio, 10, SpringLayout.SOUTH, literatureRadio);
+    panelLayout.putConstraint(SpringLayout.WEST, cinemaRadio, 0, SpringLayout.WEST, literatureRadio);
     
     panelLayout.putConstraint(SpringLayout.NORTH, literatureRadio, 10, SpringLayout.SOUTH, celebrityRadio);
     panelLayout.putConstraint(SpringLayout.WEST, literatureRadio, 0, SpringLayout.WEST, celebrityRadio);
     
     panelLayout.putConstraint(SpringLayout.NORTH, clueLabel, 10, SpringLayout.SOUTH, answerField);
-    panelLayout.putConstraint(SpringLayout.NORTH, answerField, 40, SpringLayout.SOUTH, literatureRadio);
-    panelLayout.putConstraint(SpringLayout.WEST, answerField, 0, SpringLayout.WEST, celebrityRadio);
+    panelLayout.putConstraint(SpringLayout.NORTH, answerField, 40, SpringLayout.SOUTH, historyRadio);
+    panelLayout.putConstraint(SpringLayout.WEST, answerField, 0, SpringLayout.WEST, historyRadio);
     panelLayout.putConstraint(SpringLayout.EAST, answerField, -15, SpringLayout.EAST, this);
     
-    panelLayout.putConstraint(SpringLayout.WEST, clueField, 0, SpringLayout.WEST, celebrityRadio);
+    panelLayout.putConstraint(SpringLayout.WEST, clueField, 0, SpringLayout.WEST, historyRadio);
     panelLayout.putConstraint(SpringLayout.SOUTH, clueField, 55, SpringLayout.SOUTH, answerField);
     panelLayout.putConstraint(SpringLayout.EAST, clueField, 0, SpringLayout.EAST, answerField);
-    panelLayout.putConstraint(SpringLayout.WEST, startButton, 0, SpringLayout.WEST, celebrityRadio);
+    panelLayout.putConstraint(SpringLayout.WEST, startButton, 0, SpringLayout.WEST, historyRadio);
     panelLayout.putConstraint(SpringLayout.EAST, startButton, 0, SpringLayout.EAST, answerField);
     
   }
@@ -274,7 +307,8 @@ public class StartPanel extends JPanel
      */
     literatureRadio.addActionListener(select -> clueLabel.setText(literatureClue));
     celebrityRadio.addActionListener(select -> clueLabel.setText(celebrityClue));
-    
+    cinemaRadio.addActionListener(select -> clueLabel.setText(cinemaClue));
+    historyRadio.addActionListener(select -> clueLabel.setText(historyClue));
   }
   
   private void invalidInput()
@@ -291,6 +325,14 @@ public class StartPanel extends JPanel
     if (literatureRadio.isSelected())
     {
       type = "Literature";
+    }
+    else if(cinemaRadio.isSelected())
+    {
+    	type = "Cinema";
+    }
+    else if(historyRadio.isSelected())
+    {
+    	type = "History";
     }
     String answer = answerField.getText().trim();
     String clue = clueField.getText().trim();
